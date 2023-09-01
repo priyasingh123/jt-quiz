@@ -1,11 +1,14 @@
 
 import { useEffect, useState } from 'react'
+import Report from './Report'
+import Timer from './Timer'
 import './QuestionBoard.css'
 
 
-const QuestionBoard = ({setTotalQues, totalQues}) => {
+const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum}) => {
+    //todo: dont set questionBank as state
     const [questionBank, setQuestionBank] = useState([])
-    const [quesNum, setQuesNum] = useState(0)
+    const [showReport, setShowReport] = useState(false)
 
     useEffect(() => {
         async function fetchData() {
@@ -13,16 +16,21 @@ const QuestionBoard = ({setTotalQues, totalQues}) => {
           const response = await data.json()
         //   console.log (response)
           setQuestionBank(response?.results)
-          const arr = Array(response?.results?.length).fill({visited: false, attempted:""})
+        //   const arr = Array(response?.results?.length).fill({visited: false, attempted:""})
+            const arr = Array.from ({length:response?.results?.length }, ()=> ({visited: false, attempted: ''}))
           setTotalQues(arr)
         }
         fetchData();
       }, []);
 
 
+      const handleSubmit = () => {
+        // console.log ('SUBMIT ',totalQues)
+        setShowReport(true)
+      }
     return (
-        <>
-            {questionBank.length > 0 && 
+        <>  
+            {questionBank.length > 0 && !showReport && 
                 <>
                 <Question
                 //todo try to avoid making quesNum as state
@@ -33,10 +41,16 @@ const QuestionBoard = ({setTotalQues, totalQues}) => {
                     setTotalQues={setTotalQues}
                     totalQues={totalQues}
                 />
-                <button disabled={quesNum === 0? true:false} onClick={()=>setQuesNum((quesNum) => quesNum-1)}>&larr; PREVIOUS</button>
-                <button disabled={quesNum === questionBank.length-1? true:false} onClick={()=>setQuesNum((quesNum) => quesNum+1)}>NEXT &rarr;</button>
+                <Timer setShowReport={setShowReport}/>
+                {/* todo: disabled make addition in class to show disabled */}
+                <div>
+                <button className="btn" disabled={quesNum === 0? true:false} onClick={()=>setQuesNum((quesNum) => quesNum-1)}>&larr; PREVIOUS</button>
+                <button className="btn" disabled={quesNum === questionBank.length-1? true:false} onClick={()=>setQuesNum((quesNum) => quesNum+1)}>NEXT &rarr;</button>
+                <button className="btn" onClick={handleSubmit}>SUBMIT</button>
+                </div>
                 </>
             }
+            {showReport && <Report questionBank={questionBank} totalQues={totalQues}/>}
         </>
     )
 }
@@ -44,7 +58,16 @@ const QuestionBoard = ({setTotalQues, totalQues}) => {
 const Question = ({question, correct_answer, incorrect_answers, index, totalQues, setTotalQues}) => {
     const options = [...incorrect_answers, correct_answer]
     //todo: put random logic for options
-    console.log (totalQues)
+    // console.log (totalQues)
+
+    useEffect(() => {
+        // console.log ('index',index)
+        const visitedTotalQues = totalQues.map ((ques, ind) => 
+            ind === index ? {...ques, visited: true}: ques
+        )
+        setTotalQues(visitedTotalQues)
+    },[index])
+
     const handleChange = (e) => {
         const updatedTotalQues = totalQues.map ((ques, ind) => 
             ind === index ? {...ques, attempted: e.target.value, visited: true}: ques
@@ -57,8 +80,8 @@ const Question = ({question, correct_answer, incorrect_answers, index, totalQues
 
             {options.map ((option) => {
                 return (
-                    <div key={option} className='option'>
-                        {console.log (`${index}-${option === totalQues[index].attempted}`)}
+                    <div key={`${index}-${option}`} className='option'>
+                        {/* {console.log (`${index}-${option === totalQues[index].attempted}`)} */}
                         <label ><input type="radio" name={`${question}-${index+1}`} value={option} checked={option === totalQues[index].attempted? true: false} onChange={handleChange} />{option}</label>
                     </div>
                 )
@@ -68,15 +91,3 @@ const Question = ({question, correct_answer, incorrect_answers, index, totalQues
 }
 
 export default QuestionBoard
-
-// const Option = ({option, index, setTotalQues, totalQues}) => {
-//     const handleChange = (e) => {
-//         console.log (e)
-//     }
-
-//     return (
-//         <div className='option'>
-//             <label ><input type="radio" id="option" name="option" value={totalQues[index].attempted} onChange={handleChange} />{option}</label>
-//         </div>
-//     )
-// }

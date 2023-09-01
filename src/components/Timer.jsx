@@ -1,27 +1,38 @@
 import { useState, useEffect } from "react"
-const Timer = () => {
-    //send min initial value from parent
-    const [min, setMin] = useState(1)
-    const [sec, setSec] = useState(5)
+import "./QuestionBoard.css"
 
+const Timer = ({setShowReport}) => {
+    //send min initial value from parent
+    const [min, setMin] = useState(30)
+    // const [min, setMin] = useState(2)
+    const [sec, setSec] = useState(0)
     useEffect (() => {
+        let timer;
         if (min > 0) {
-            setTimeout(() => {
-                sec >=2 ? setSec((prevSec) => prevSec-1): setSec(5)
-                sec >=2 ? setMin((prevMin) => prevMin): setMin((prevMin) => prevMin-1)
-            }, 1000)
+            timer = setTimeout(() => {
+                if (sec > 0) {
+                    setSec((prevSec) => prevSec - 1);
+                } else {
+                    setMin((prevMin) => prevMin - 1);
+                    setSec(59);
+                }
+            }, 1000);
+        } else if (min === 0 && sec === 0) {
+            timer = setTimeout(() => {
+                setShowReport(true);
+            }, 1000);
         }
-        else if (min === 0) {
-            setTimeout(() => {
-                sec >=1 ? setSec((prevSec) => prevSec-1): setSec((prevSec) => prevSec)
-            }, 1000)
-        }
-    }, [sec])
+        return () => {
+            if (timer) {
+                clearTimeout(timer);
+            }
+        };
+    }, [min, sec, setShowReport]);
 
     return (
-        <div>
-            <button>{min}:{sec}</button>
-        </div>
+        <>
+        <div className="timer">{min.toString().padStart(2, '0')}:{sec.toString().padStart(2, '0')}</div>
+        </>
     )
 }
 

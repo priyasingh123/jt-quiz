@@ -1,0 +1,38 @@
+.report-file{
+    display: flex;
+    flex-direction: column;
+    border: solid red 2px;
+    width: 90%;
+    margin: auto;
+}
+
+.review{
+    border: grey solid 2px;
+    width: 90%;
+    border-radius: 20px;
+    
+}
+
+.correct{
+    border: green solid 2px;
+}
+
+.incorrect{
+    border: maroon solid 2px;
+}
+
+.unattempted{
+    border: grey solid 2px;
+}
+
+.correct-p{
+    color: green ;
+}
+
+.incorrect-p{
+    color: maroon ;
+}
+
+.unattempted-p{
+    color: grey ;
+}

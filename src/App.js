@@ -5,12 +5,17 @@ import QuestionBoard from './components/QuestionBoard'
 import NavigationBar from './components/NavigationBar';
 import QuizPage from './components/QuizPage';
 import Timer from './components/Timer';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 function App() {
   return (
-    //<div className="App">
-        <QuizPage/>
-    //</div>
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<EntryPage/>}/>
+            <Route exact path="/quiz" element={<QuizPage/>}/>
+          </Routes>
+        </Router>
+        
   );
 }
 

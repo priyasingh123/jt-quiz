@@ -1,8 +1,7 @@
 .container{
-    border: 2px solid black;
     display: flex;
     justify-content: center;
-    height: 100vh;
+    height: 90vh;
     align-items: center;
 
 }
@@ -24,13 +23,18 @@
     font-weight: 400;
 
 }
+.label{
+    padding: 0 35px;
+}
+.inputBox{
+    width: 200px;
+    margin: 0 13px;
+    height: 27px;
+    border-radius: 10px;
+    padding: 0px 8px;
+    font-weight: 300;
+} 
 
-/* .inputBox{
-    position:absolute;
-    top:0;
-    left:0;
-    width: 100%;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    height: 48px;
-} */
+.entry{
+    margin: 17px 0 0 32px
+}
