@@ -4,12 +4,12 @@ import {useState} from 'react'
 
 
 const QuizPage = () => {
-    const [totalQues, setTotalQues] = useState(null)
+    const [totalQues, setTotalQues] = useState([])
     return (
         
         <div>
-            {/* <NavigationBar totalQues={totalQues} /> */}
-            <QuestionBoard setTotalQues={setTotalQues}/>
+            <NavigationBar totalQues={totalQues} />
+            <QuestionBoard setTotalQues={setTotalQues} totalQues={totalQues}/>
         </div>
     )
 }

@@ -3,3 +3,13 @@
     border: 2px solid green;
     border-radius: 4px;
 }
+
+.option{
+    width: 400px;
+    height: 40px;
+    border-radius: 16px;
+    border: solid green 2px;
+    box-sizing:border-box;
+    padding-left: 5px;
+    padding-top: 5px;
+}
