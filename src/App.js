@@ -11,7 +11,7 @@ function App() {
   return (
         <Router>
           <Routes>
-            <Route exact path="/" element={<EntryPage/>}/>
+            <Route exact path="/jt-quiz" element={<EntryPage/>}/>
             <Route exact path="/quiz" element={<QuizPage/>}/>
           </Routes>
         </Router>
