@@ -24,21 +24,16 @@
 }
 
 .timer{
-    position: absolute;
-    right: 200px;
-    top: 64px;
     display:inline-block;
     width: 111px;
-    height: 70px;
     border-radius: 20px;
     background-color: #204aefcc;
     color: white;
     border: none;
     font-weight: 700;
     font-size:38px;
-    text-align: center;
-    box-sizing: border-box;
     padding: 7px;
+    margin: 0 90%;
 }
 
 .buttons{

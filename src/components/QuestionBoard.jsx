@@ -31,6 +31,7 @@ const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum, setShowRep
         <>  
             {questionBank.length > 0 && !showReport && 
                 <>
+                <Timer setShowReport={setShowReport}/>
                 <Question
                 //todo try to avoid making quesNum as state
                     index={quesNum}
@@ -40,7 +41,7 @@ const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum, setShowRep
                     setTotalQues={setTotalQues}
                     totalQues={totalQues}
                 />
-                <Timer setShowReport={setShowReport}/>
+                
                 {/* todo: disabled make addition in class to show disabled */}
                 <div className="buttons">
                     <button className="btn" disabled={quesNum === 0? true:false} onClick={()=>setQuesNum((quesNum) => quesNum-1)}>&larr; PREVIOUS</button>
