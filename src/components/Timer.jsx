@@ -3,9 +3,9 @@ import "./QuestionBoard.css"
 
 const Timer = ({setShowReport}) => {
     //send min initial value from parent
-    const [min, setMin] = useState(30)
+    const [min, setMin] = useState(1)
     // const [min, setMin] = useState(2)
-    const [sec, setSec] = useState(0)
+    const [sec, setSec] = useState(30)
     useEffect (() => {
         let timer;
         if (min > 0) {
@@ -20,6 +20,11 @@ const Timer = ({setShowReport}) => {
         } else if (min === 0 && sec === 0) {
             timer = setTimeout(() => {
                 setShowReport(true);
+            }, 1000);
+        }
+        else if (min === 0) {
+            timer = setTimeout(() => {
+                setSec((prevSec) => prevSec - 1);
             }, 1000);
         }
         return () => {

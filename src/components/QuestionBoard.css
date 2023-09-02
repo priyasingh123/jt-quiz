@@ -1,9 +1,5 @@
 .question{
-    width: 55%;
-    display:inline-block;
-    margin: 0 auto;
-    border: 2px solid rgb(65, 54, 168);
-    border-radius: 4px;
+    
 }
 
 .option{
@@ -23,6 +19,7 @@
     background-color: #092492cc;
     color: white;
     border: none;
+    margin: 17px auto;
 }
 
 .timer{
@@ -41,5 +38,10 @@
     text-align: center;
     box-sizing: border-box;
     padding: 7px;
+}
+
+.buttons{
+    display: flex;
+    
 }
 

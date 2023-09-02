@@ -1,9 +1,42 @@
 import './Report.css'
+import {useState, useEffect} from 'react'
 
 const Report = ({questionBank, totalQues}) => {
+    const [correctNo, setCorrectNo] = useState(0);
+  const [incorrectNo, setIncorrectNo] = useState(0);
+  const [unattemptedNo, setUnattemptedNo] = useState(0);
+
+  useEffect(() => {
+    let correctCount = 0;
+    let incorrectCount = 0;
+    let unattemptedCount = 0;
+
+    questionBank.forEach((ques, index) => {
+      if (totalQues[index].attempted === ques.correct_answer) {
+        correctCount++;
+      } else if (!totalQues[index].attempted) {
+        unattemptedCount++;
+      } else {
+        incorrectCount++;
+      }
+    });
+
+    setCorrectNo(correctCount);
+    setIncorrectNo(incorrectCount);
+    setUnattemptedNo(unattemptedCount);
+  }, []);
+
+
     return (
         <div className="report-file">
-            {/* todo show options also */}
+            <h1 className="report-heading">Results</h1>
+            <div className="result-summary">
+                <p className={`review-ques`}>Total : 15</p>
+                <p className={`correct-p`}>Correct : {correctNo} </p>
+                <p className={`incorrect-p`}>Incorrect : {incorrectNo}</p>
+                <p className={`unattempted-p`}>Unattempted : {unattemptedNo}</p>
+            </div>
+            
             {questionBank.map ((ques, index)=> {
                 let reviewClass=''
                 if (totalQues[index].attempted === ques.correct_answer) {
@@ -16,11 +49,15 @@ const Report = ({questionBank, totalQues}) => {
                     reviewClass = 'incorrect'
                 }
                 return (
+                    
+                    
                     <div key={index} className={`review ${reviewClass}`}>
                         <p className={`${reviewClass}-p`}>{String(reviewClass).toUpperCase()}</p>
-                        <p>{ques.question}</p>
-                        <p>Your Answer: {totalQues[index].attempted}</p>
+                        <p className={`review-ques`}>{ques.question}</p>
+                        <p className={`${reviewClass}-p`}>Your Answer: {totalQues[index].attempted}</p>
+                        {reviewClass !== 'correct' && <p className={`correct-p`}>Correct Answer: {questionBank[index].correct_answer}</p>}
                     </div>
+                    
                 )
             })}
         </div>

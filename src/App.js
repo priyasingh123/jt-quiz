@@ -12,7 +12,7 @@ function App() {
         <Router>
           <Routes>
             <Route exact path="/jt-quiz" element={<EntryPage/>}/>
-            <Route exact path="/quiz" element={<QuizPage/>}/>
+            <Route exact path="/jt-quiz/quiz" element={<QuizPage/>}/>
           </Routes>
         </Router>
         

@@ -5,16 +5,15 @@ import Timer from './Timer'
 import './QuestionBoard.css'
 
 
-const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum}) => {
+const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum, setShowReport, showReport}) => {
     //todo: dont set questionBank as state
     const [questionBank, setQuestionBank] = useState([])
-    const [showReport, setShowReport] = useState(false)
+    
 
     useEffect(() => {
         async function fetchData() {
           const data = await fetch('https://opentdb.com/api.php?amount=15')
           const response = await data.json()
-        //   console.log (response)
           setQuestionBank(response?.results)
         //   const arr = Array(response?.results?.length).fill({visited: false, attempted:""})
             const arr = Array.from ({length:response?.results?.length }, ()=> ({visited: false, attempted: ''}))
@@ -25,7 +24,7 @@ const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum}) => {
 
 
       const handleSubmit = () => {
-        // console.log ('SUBMIT ',totalQues)
+        console.log ('SUBMIT ',totalQues)
         setShowReport(true)
       }
     return (
@@ -41,12 +40,14 @@ const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum}) => {
                     setTotalQues={setTotalQues}
                     totalQues={totalQues}
                 />
-                <Timer setShowReport={setShowReport}/>
+                {/* <Timer setShowReport={setShowReport}/> */}
                 {/* todo: disabled make addition in class to show disabled */}
+                <div className="buttons">
+                    <button className="btn" disabled={quesNum === 0? true:false} onClick={()=>setQuesNum((quesNum) => quesNum-1)}>&larr; PREVIOUS</button>
+                    <button className="btn" disabled={quesNum === questionBank.length-1? true:false} onClick={()=>setQuesNum((quesNum) => quesNum+1)}>NEXT &rarr;</button>
+                </div>
                 <div>
-                <button className="btn" disabled={quesNum === 0? true:false} onClick={()=>setQuesNum((quesNum) => quesNum-1)}>&larr; PREVIOUS</button>
-                <button className="btn" disabled={quesNum === questionBank.length-1? true:false} onClick={()=>setQuesNum((quesNum) => quesNum+1)}>NEXT &rarr;</button>
-                <button className="btn" onClick={handleSubmit}>SUBMIT</button>
+                    <button className="btn" onClick={handleSubmit}>SUBMIT</button>
                 </div>
                 </>
             }
@@ -57,16 +58,13 @@ const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum}) => {
 
 const Question = ({question, correct_answer, incorrect_answers, index, totalQues, setTotalQues}) => {
     const options = [...incorrect_answers, correct_answer]
-    //todo: put random logic for options
-    // console.log (totalQues)
 
     useEffect(() => {
-        // console.log ('index',index)
-        const visitedTotalQues = totalQues.map ((ques, ind) => 
-            ind === index ? {...ques, visited: true}: ques
-        )
-        setTotalQues(visitedTotalQues)
-    },[index])
+        const visitedTotalQues = totalQues.map((ques, ind) => {
+          return ind === index ? { ...ques, visited: true} : ques;
+        });
+        setTotalQues(visitedTotalQues);
+      }, [index]);
 
     const handleChange = (e) => {
         const updatedTotalQues = totalQues.map ((ques, ind) => 
@@ -81,7 +79,6 @@ const Question = ({question, correct_answer, incorrect_answers, index, totalQues
             {options.map ((option) => {
                 return (
                     <div key={`${index}-${option}`} className='option'>
-                        {/* {console.log (`${index}-${option === totalQues[index].attempted}`)} */}
                         <label ><input type="radio" name={`${question}-${index+1}`} value={option} checked={option === totalQues[index].attempted? true: false} onChange={handleChange} />{option}</label>
                     </div>
                 )

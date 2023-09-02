@@ -1,24 +1,21 @@
 .container{
     display: flex;
     justify-content: center;
-    height: 90vh;
     align-items: center;
+    margin: 5rem 0;
 
 }
 
 .login-form{
-    border: 2px solid red;
-    width: 380px;
+    box-sizing: border-box;
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-
+    box-shadow: 4px 4px 4px grey;
 }
 
 .login-heading{
-    margin: 0;
-    padding: 35px;
+    margin: 1rem auto;
     font-size: 34px;
     font-weight: 400;
 
@@ -37,4 +34,17 @@
 
 .entry{
     margin: 17px 0 0 32px
+}
+
+.error{
+    color: red;
+    padding: 0 35px;
+}
+
+.none{
+    display: none;
+}
+
+.inline{
+    display: inline;
 }
