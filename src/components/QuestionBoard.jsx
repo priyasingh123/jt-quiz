@@ -46,7 +46,7 @@ const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum, setShowRep
                     <button className="btn" disabled={quesNum === 0? true:false} onClick={()=>setQuesNum((quesNum) => quesNum-1)}>&larr; PREVIOUS</button>
                     <button className="btn" disabled={quesNum === questionBank.length-1? true:false} onClick={()=>setQuesNum((quesNum) => quesNum+1)}>NEXT &rarr;</button>
                 </div>
-                <div>
+                <div className="buttons">
                     <button className="btn" onClick={handleSubmit}>SUBMIT</button>
                 </div>
                 </>
@@ -76,6 +76,7 @@ const Question = ({question, correct_answer, incorrect_answers, index, totalQues
         <div className="question">
             <p>{`${index+1}. ${question}`}</p>
 
+            <div className='options'>
             {options.map ((option) => {
                 return (
                     <div key={`${index}-${option}`} className='option'>
@@ -83,6 +84,7 @@ const Question = ({question, correct_answer, incorrect_answers, index, totalQues
                     </div>
                 )
             })}
+            </div>
         </div>
     )
 }

@@ -1,15 +1,17 @@
 .question{
-    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .option{
-    width: 400px;
-    min-height: 40px;
+    width: 100%;
+    min-height: 20%;
     border-radius: 16px;
     border: solid rgb(65, 54, 168) 2px;
-    box-sizing:border-box;
+    box-sizing: border-box;
     padding: 5px 0 5px 25px;
-    margin:10px;
+    margin: 10px;
 }
 
 .btn{
@@ -19,7 +21,6 @@
     background-color: #092492cc;
     color: white;
     border: none;
-    margin: 17px auto;
 }
 
 .timer{
@@ -41,7 +42,7 @@
 }
 
 .buttons{
+    justify-content: space-around;
     display: flex;
-    
 }
 
