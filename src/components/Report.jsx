@@ -53,7 +53,7 @@ const Report = ({questionBank, totalQues}) => {
                     
                     <div key={index} className={`review ${reviewClass}`}>
                         <p className={`${reviewClass}-p`}>{String(reviewClass).toUpperCase()}</p>
-                        <p className={`review-ques`}>{ques.question}</p>
+                        <p className={`review-ques`}>{`${index+1}. ${ques.question}`}</p>
                         <p className={`${reviewClass}-p`}>Your Answer: {totalQues[index].attempted}</p>
                         {reviewClass !== 'correct' && <p className={`correct-p`}>Correct Answer: {questionBank[index].correct_answer}</p>}
                     </div>
