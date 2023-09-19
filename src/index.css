@@ -123,8 +123,6 @@ code {
 }
 
 .timer{
-  display:inline-block;
-  width: 111px;
   border-radius: 20px;
   background-color: #204aefcc;
   color: white;
@@ -132,7 +130,7 @@ code {
   font-weight: 700;
   font-size:38px;
   padding: 7px;
-  margin: 0 90%;
+  height:56px;
 }
 
 .buttons{
@@ -252,4 +250,13 @@ code {
   margin:4px;
   border-radius:20px;
   background-color: rgb(221, 217, 217);
+}
+
+.question-group{
+  display:flex;
+  flex-direction: column;
+}
+
+.question-timer{
+  display: flex;
 }

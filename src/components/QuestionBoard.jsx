@@ -3,15 +3,15 @@ import { useEffect, useState } from 'react'
 import Report from './Report'
 import Question from './Question'
 import Timer from './Timer'
-import ShimmerUI from './ShimmerUI' 
+import ShimmerUI from './ShimmerUI'
 import "./../index.css"
-import _ from 'lodash' 
+import _ from 'lodash'
 
 
-const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum, setShowReport, showReport, emailVal}) => {
+const QuestionBoard = ({ setTotalQues, totalQues, quesNum, setQuesNum, setShowReport, showReport, emailVal }) => {
     //todo: dont set questionBank as state
     const [questionBank, setQuestionBank] = useState([])
-    
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -23,10 +23,10 @@ const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum, setShowRep
                 setQuestionBank(questionBankData)
 
                 const arr = questionBankData.map((ques) => {
-                    return  {visited:false, attempted:'', mcq:shuffleOptions([...ques.incorrect_answers, ques.correct_answer])}
+                    return { visited: false, attempted: '', mcq: shuffleOptions([...ques.incorrect_answers, ques.correct_answer]) }
                 })
-                setTotalQues(arr)               
-                
+                setTotalQues(arr)
+
             }
             catch (error) {
                 console.log('Error ', error)
@@ -37,36 +37,39 @@ const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum, setShowRep
 
 
     const handleSubmit = () => {
-    console.log ('SUBMIT ',totalQues)
-    setShowReport(true)
+        console.log('SUBMIT ', totalQues)
+        setShowReport(true)
     }
 
     return (
-        <>  {!showReport ? 
+        <>  {!showReport ?
             (questionBank.length > 0 ?
-                <>
-                <Timer setShowReport={setShowReport}/>
+                <div className='question-group'>
 
-                <Question
-                //todo try to avoid making quesNum as state
-                    index={quesNum}
-                    question={questionBank[quesNum].question}
-                    setTotalQues={setTotalQues}
-                    totalQues={totalQues}
-                />
-                
-                {/* todo: disabled make addition in class to show disabled */}
-                <div className="buttons">
-                    <button className="btn" disabled={quesNum === 0? true:false} onClick={()=>setQuesNum((quesNum) => quesNum-1)}>&larr; PREVIOUS</button>
-                    <button className="btn" disabled={quesNum === questionBank.length-1? true:false} onClick={()=>setQuesNum((quesNum) => quesNum+1)}>NEXT &rarr;</button>
-                </div>
-                <div className="buttons">
-                    <button className="btn" onClick={handleSubmit}>SUBMIT</button>
-                </div>
-                </> :
-                <ShimmerUI/>
-             ) :
-            (showReport && <Report emailVal={emailVal} questionBank={questionBank} totalQues={totalQues}/>)
+                    <div className='question-timer'>
+
+                        <Question
+                            //todo try to avoid making quesNum as state
+                            index={quesNum}
+                            question={questionBank[quesNum].question}
+                            setTotalQues={setTotalQues}
+                            totalQues={totalQues}
+                        />
+                        <Timer setShowReport={setShowReport} />
+                    </div>
+
+                    {/* todo: disabled make addition in class to show disabled */}
+                    <div className="buttons">
+                        <button className="btn" disabled={quesNum === 0 ? true : false} onClick={() => setQuesNum((quesNum) => quesNum - 1)}>&larr; PREVIOUS</button>
+                        <button className="btn" disabled={quesNum === questionBank.length - 1 ? true : false} onClick={() => setQuesNum((quesNum) => quesNum + 1)}>NEXT &rarr;</button>
+                    </div>
+                    <div className="buttons">
+                        <button className="btn" onClick={handleSubmit}>SUBMIT</button>
+                    </div>
+                </div> :
+                <ShimmerUI />
+            ) :
+            (showReport && <Report emailVal={emailVal} questionBank={questionBank} totalQues={totalQues} />)
         }
         </>
     )
@@ -74,9 +77,9 @@ const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum, setShowRep
 
 const shuffleOptions = (arr) => {
     const shuffledOptions = [...arr];
-    shuffledOptions.sort(()=>Math.random()-0.5)
+    shuffledOptions.sort(() => Math.random() - 0.5)
     return shuffledOptions;
-  };
+};
 
 
 
