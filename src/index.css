@@ -11,3 +11,245 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* Report */
+.report-file{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+  margin: auto;
+}
+
+.review{
+  border: grey solid 2px;
+  width: 90%;
+  border-radius: 20px;
+  
+}
+
+.correct{
+  border: green solid 2px;
+  margin:5px auto;
+}
+
+.incorrect{
+  border: maroon solid 2px;
+  margin:5px auto;
+}
+
+.unattempted{
+  border: grey solid 2px;
+  margin:5px auto;
+}
+
+.correct-p{
+  color: green ;
+  padding-left: 2rem;
+  font-weight:600;
+  font-size:1.2rem;
+}
+
+.incorrect-p{
+  color: maroon ;
+  padding-left: 2rem;
+  font-weight:600;
+  font-size:1.2rem;
+  
+}
+
+.unattempted-p{
+  color: grey ;
+  padding-left: 2rem;
+  font-weight:600;
+  font-size:1.2rem;
+}
+
+.review-ques{
+  padding-left: 2rem;
+  font-weight:600;
+  font-size:1.2rem;
+}
+
+.report-heading{
+  padding: 5px;
+  margin: auto;
+}
+
+.result-summary{
+  display: flex;
+  margin: 5px auto;
+  padding-right: 0.5rem;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 2px grey;
+}
+
+
+/* QuizPage */
+
+.quiz-page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+/* Question Board */
+
+.question{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.option{
+  width: 100%;
+  min-height: 20%;
+  border-radius: 16px;
+  border: solid rgb(65, 54, 168) 2px;
+  box-sizing: border-box;
+  padding: 5px 0 5px 25px;
+  margin: 10px;
+}
+
+.btn{
+  width: 105px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #092492cc;
+  color: white;
+  border: none;
+}
+
+.timer{
+  display:inline-block;
+  width: 111px;
+  border-radius: 20px;
+  background-color: #204aefcc;
+  color: white;
+  border: none;
+  font-weight: 700;
+  font-size:38px;
+  padding: 7px;
+  margin: 0 90%;
+}
+
+.buttons{
+  justify-content: space-around;
+  display: flex;
+}
+
+/* NavigationBar */
+
+.navigationBar{
+  height: 40px;
+  width:100%;
+}
+
+.navbar{
+  display: flex;
+  height:100%;
+  margin:0;
+  background-color: #1b9ae2;
+  text-align: center;
+  align-items: center;
+  padding-left:0;
+}
+
+.navbar-item{
+  list-style: none;
+  width: 100%;
+  height: 80%;
+  background-color: #092492cc;
+  border-radius:25px;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.navbar-anchor{
+  text-decoration: none;
+  font-size: 22px;
+  color: white;
+}
+
+.visited{
+  background-color: rgb(167, 152, 42);   
+}
+
+.attempted{
+  background-color: rgb(15, 132, 93);
+}
+
+/* EntryPage */
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem 0;
+
+}
+
+.login-form{
+  box-sizing: border-box;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 4px 4px grey;
+}
+
+.login-heading{
+  margin: 1rem auto;
+  font-size: 34px;
+  font-weight: 400;
+
+}
+.label{
+  padding: 0 35px;
+}
+.inputBox{
+  width: 200px;
+  margin: 0 13px;
+  height: 27px;
+  border-radius: 10px;
+  padding: 0px 8px;
+  font-weight: 300;
+} 
+
+.entry{
+  margin: 17px 0 14px 114px;
+}
+
+.error{
+  color: red;
+  padding: 0 35px;
+}
+
+.none{
+  display: none;
+}
+
+.inline{
+  display: inline;
+}
+
+
+/* Shimmer UI */
+
+.shimmer-question{
+  display: flex;
+  flex-direction: column;
+  width:400px;
+  height:40px;
+  background-color: rgb(221, 217, 217);
+  border-radius:20px;
+}
+
+.shimmer-option{
+  width:150px;
+  height:40px;
+  margin:4px;
+  border-radius:20px;
+  background-color: rgb(221, 217, 217);
+}

@@ -1,14 +1,12 @@
 import { useEffect } from 'react'
-import './NavigationBar.css'
+import "./../index.css"
 
 const NavigationBar = ({totalQues, setQuesNum}) => {
     useEffect(() => {
-        //render again
     },[totalQues])
 
-    const handleNavigation = (e) => {
-        // console.log (e.target.innerHTML)
-        setQuesNum(e.target.innerHTML-1)
+    const handleNavigation = (index) => {
+        setQuesNum(index)
     }
 
     return (
@@ -18,8 +16,8 @@ const NavigationBar = ({totalQues, setQuesNum}) => {
                 let addClass=''
                 addClass = ques.attempted? 'attempted': ques.visited? 'visited' :'' 
                 return (
-                    <li key={`${index}`} className={`navbar-item ${addClass}`}>
-                        <a onClick={handleNavigation} href="#" className={`navbar-anchor`}>{index+1}</a>
+                    <li key={`${index}`} onClick={()=>handleNavigation(index)} className={`navbar-item ${addClass}`}>
+                        <a  href="#" className={`navbar-anchor`}>{index+1}</a>
                     </li>
                 )
             })}

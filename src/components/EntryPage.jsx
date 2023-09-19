@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
-import './EntryPage.css'
 import { useNavigate } from 'react-router-dom'
+import "./../index.css"
 
-const EntryPage = () => {
-    const [emailVal, setEmailVal] = useState('')
+const EntryPage = ({emailVal, setEmailVal}) => {
+    
     const [visible, setVisible] = useState('none')
     const navigate = useNavigate()
 

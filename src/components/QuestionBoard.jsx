@@ -1,43 +1,56 @@
 
 import { useEffect, useState } from 'react'
 import Report from './Report'
+import Question from './Question'
 import Timer from './Timer'
-import './QuestionBoard.css'
+import ShimmerUI from './ShimmerUI' 
+import "./../index.css"
+import _ from 'lodash' 
 
 
-const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum, setShowReport, showReport}) => {
+const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum, setShowReport, showReport, emailVal}) => {
     //todo: dont set questionBank as state
     const [questionBank, setQuestionBank] = useState([])
     
-
     useEffect(() => {
         async function fetchData() {
-          const data = await fetch('https://opentdb.com/api.php?amount=15')
-          const response = await data.json()
-          setQuestionBank(response?.results)
-        //   const arr = Array(response?.results?.length).fill({visited: false, attempted:""})
-            const arr = Array.from ({length:response?.results?.length }, ()=> ({visited: false, attempted: ''}))
-          setTotalQues(arr)
+            try {
+                const data = await fetch('https://opentdb.com/api.php?amount=15')
+                const response = await data.json()
+                const questionBankData = response?.results;
+
+
+                setQuestionBank(questionBankData)
+
+                const arr = questionBankData.map((ques) => {
+                    return  {visited:false, attempted:'', mcq:shuffleOptions([...ques.incorrect_answers, ques.correct_answer])}
+                })
+                setTotalQues(arr)               
+                
+            }
+            catch (error) {
+                console.log('Error ', error)
+            }
         }
         fetchData();
-      }, []);
+    }, []);
 
 
-      const handleSubmit = () => {
-        console.log ('SUBMIT ',totalQues)
-        setShowReport(true)
-      }
+    const handleSubmit = () => {
+    console.log ('SUBMIT ',totalQues)
+    setShowReport(true)
+    }
+
     return (
-        <>  
-            {questionBank.length > 0 && !showReport && 
+        <>  {!showReport ? 
+            (questionBank.length > 0 ?
                 <>
                 <Timer setShowReport={setShowReport}/>
+
                 <Question
                 //todo try to avoid making quesNum as state
                     index={quesNum}
                     question={questionBank[quesNum].question}
-                    correct_answer={questionBank[quesNum].correct_answer}
-                    incorrect_answers={questionBank[quesNum].incorrect_answers} 
                     setTotalQues={setTotalQues}
                     totalQues={totalQues}
                 />
@@ -50,44 +63,21 @@ const QuestionBoard = ({setTotalQues, totalQues, quesNum, setQuesNum, setShowRep
                 <div className="buttons">
                     <button className="btn" onClick={handleSubmit}>SUBMIT</button>
                 </div>
-                </>
-            }
-            {showReport && <Report questionBank={questionBank} totalQues={totalQues}/>}
+                </> :
+                <ShimmerUI/>
+             ) :
+            (showReport && <Report emailVal={emailVal} questionBank={questionBank} totalQues={totalQues}/>)
+        }
         </>
     )
 }
 
-const Question = ({question, correct_answer, incorrect_answers, index, totalQues, setTotalQues}) => {
-    const options = [...incorrect_answers, correct_answer]
+const shuffleOptions = (arr) => {
+    const shuffledOptions = [...arr];
+    shuffledOptions.sort(()=>Math.random()-0.5)
+    return shuffledOptions;
+  };
 
-    useEffect(() => {
-        const visitedTotalQues = totalQues.map((ques, ind) => {
-          return ind === index ? { ...ques, visited: true} : ques;
-        });
-        setTotalQues(visitedTotalQues);
-      }, [index]);
 
-    const handleChange = (e) => {
-        const updatedTotalQues = totalQues.map ((ques, ind) => 
-            ind === index ? {...ques, attempted: e.target.value, visited: true}: ques
-        )
-        setTotalQues(updatedTotalQues)
-    }
-    return (
-        <div className="question">
-            <p>{`${index+1}. ${question}`}</p>
-
-            <div className='options'>
-            {options.map ((option) => {
-                return (
-                    <div key={`${index}-${option}`} className='option'>
-                        <label ><input type="radio" name={`${question}-${index+1}`} value={option} checked={option === totalQues[index].attempted? true: false} onChange={handleChange} />{option}</label>
-                    </div>
-                )
-            })}
-            </div>
-        </div>
-    )
-}
 
 export default QuestionBoard

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import "./QuestionBoard.css"
+import "./../index.css"
 
 const Timer = ({setShowReport}) => {
     //send min initial value from parent

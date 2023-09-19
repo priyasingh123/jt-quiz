@@ -1,7 +1,7 @@
-import './Report.css'
 import {useState, useEffect} from 'react'
+import "./../index.css"
 
-const Report = ({questionBank, totalQues}) => {
+const Report = ({questionBank, totalQues, emailVal}) => {
     const [correctNo, setCorrectNo] = useState(0);
   const [incorrectNo, setIncorrectNo] = useState(0);
   const [unattemptedNo, setUnattemptedNo] = useState(0);
@@ -30,6 +30,7 @@ const Report = ({questionBank, totalQues}) => {
     return (
         <div className="report-file">
             <h1 className="report-heading">Results</h1>
+            Hi, {emailVal}
             <div className="result-summary">
                 <p className={`review-ques`}>Total : 15</p>
                 <p className={`correct-p`}>Correct : {correctNo} </p>
