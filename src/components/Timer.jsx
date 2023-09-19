@@ -2,9 +2,7 @@ import { useState, useEffect } from "react"
 import "./../index.css"
 
 const Timer = ({setShowReport}) => {
-    //send min initial value from parent
-    const [min, setMin] = useState(30)
-    // const [min, setMin] = useState(2)
+    const [min, setMin] = useState(5)
     const [sec, setSec] = useState(0)
     useEffect (() => {
         let timer;
@@ -35,9 +33,9 @@ const Timer = ({setShowReport}) => {
     }, [min, sec, setShowReport]);
 
     return (
-        <>
+    
         <div className="timer">{min.toString().padStart(2, '0')}:{sec.toString().padStart(2, '0')}</div>
-        </>
+    
     )
 }
 
