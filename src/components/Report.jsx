@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import "./../index.css"
 
-const Report = ({questionBank, totalQues, emailVal}) => {
+const Report = ({questionBank, totalQues, username}) => {
   const [correctNo, setCorrectNo] = useState(0);
   const [incorrectNo, setIncorrectNo] = useState(0);
   const [unattemptedNo, setUnattemptedNo] = useState(0);
@@ -30,7 +30,7 @@ const Report = ({questionBank, totalQues, emailVal}) => {
     return (
         <div className="report-file">
             <h1 className="report-heading">Results</h1>
-            Hi, {emailVal}
+            Hi, {username}
             <div className="result-summary">
                 <p className={`review-ques`}>Total : 15</p>
                 <p className={`correct-p`}>Correct : {correctNo} </p>

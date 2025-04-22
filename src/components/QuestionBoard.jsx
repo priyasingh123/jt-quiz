@@ -8,7 +8,7 @@ import "./../index.css"
 import _ from 'lodash'
 
 
-const QuestionBoard = ({ setTotalQues, totalQues, quesNum, setQuesNum, setShowReport, showReport, emailVal }) => {
+const QuestionBoard = ({ setTotalQues, totalQues, quesNum, setQuesNum, setShowReport, showReport, username }) => {
     //todo: dont set questionBank as state
     const [questionBank, setQuestionBank] = useState([]);
     const hasFetched = useRef(false);
@@ -73,7 +73,7 @@ const QuestionBoard = ({ setTotalQues, totalQues, quesNum, setQuesNum, setShowRe
                 </div> :
                 <ShimmerUI />
             ) :
-            (showReport && <Report emailVal={emailVal} questionBank={questionBank} totalQues={totalQues} />)
+            (showReport && <Report username={username} questionBank={questionBank} totalQues={totalQues} />)
         }
         </>
     )
