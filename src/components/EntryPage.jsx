@@ -15,6 +15,7 @@ const EntryPage = ({emailVal, setEmailVal}) => {
     }
 
     const validateEmail = () => {
+        // TODO: simply make it name 
         if (!emailVal) {
             setVisible('error')
             return false

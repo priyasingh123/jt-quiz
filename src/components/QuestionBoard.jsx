@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Report from './Report'
 import Question from './Question'
 import Timer from './Timer'
@@ -10,9 +10,11 @@ import _ from 'lodash'
 
 const QuestionBoard = ({ setTotalQues, totalQues, quesNum, setQuesNum, setShowReport, showReport, emailVal }) => {
     //todo: dont set questionBank as state
-    const [questionBank, setQuestionBank] = useState([])
+    const [questionBank, setQuestionBank] = useState([]);
+    const hasFetched = useRef(false);
 
     useEffect(() => {
+        if (hasFetched.current) return;
         async function fetchData() {
             try {
                 const data = await fetch('https://opentdb.com/api.php?amount=15')
@@ -29,10 +31,12 @@ const QuestionBoard = ({ setTotalQues, totalQues, quesNum, setQuesNum, setShowRe
 
             }
             catch (error) {
+                // todo: show error page 
                 console.log('Error ', error)
             }
         }
         fetchData();
+        hasFetched.current = true;
     }, []);
 
 
@@ -43,7 +47,7 @@ const QuestionBoard = ({ setTotalQues, totalQues, quesNum, setQuesNum, setShowRe
 
     return (
         <>  {!showReport ?
-            (questionBank.length > 0 ?
+            (questionBank?.length > 0 ?
                 <div className='question-group'>
 
                     <div className='question-timer'>
@@ -61,7 +65,7 @@ const QuestionBoard = ({ setTotalQues, totalQues, quesNum, setQuesNum, setShowRe
                     {/* todo: disabled make addition in class to show disabled */}
                     <div className="buttons">
                         <button className="btn" disabled={quesNum === 0 ? true : false} onClick={() => setQuesNum((quesNum) => quesNum - 1)}>&larr; PREVIOUS</button>
-                        <button className="btn" disabled={quesNum === questionBank.length - 1 ? true : false} onClick={() => setQuesNum((quesNum) => quesNum + 1)}>NEXT &rarr;</button>
+                        <button className="btn" disabled={quesNum === questionBank?.length - 1 ? true : false} onClick={() => setQuesNum((quesNum) => quesNum + 1)}>NEXT &rarr;</button>
                     </div>
                     <div className="buttons">
                         <button className="btn" onClick={handleSubmit}>SUBMIT</button>
