@@ -4,6 +4,7 @@ import Report from './Report'
 import Question from './Question'
 import Timer from './Timer'
 import ShimmerUI from './ShimmerUI'
+import ErrorPage from './ErrorPage'
 import "./../index.css"
 import _ from 'lodash'
 
@@ -11,6 +12,7 @@ import _ from 'lodash'
 const QuestionBoard = ({ setTotalQues, totalQues, quesNum, setQuesNum, setShowReport, showReport, username }) => {
     //todo: dont set questionBank as state
     const [questionBank, setQuestionBank] = useState([]);
+    const [error, setError] = useState(false)
     const hasFetched = useRef(false);
 
     useEffect(() => {
@@ -31,8 +33,7 @@ const QuestionBoard = ({ setTotalQues, totalQues, quesNum, setQuesNum, setShowRe
 
             }
             catch (error) {
-                // todo: show error page 
-                console.log('Error ', error)
+                setError(true)
             }
         }
         fetchData();
@@ -41,12 +42,11 @@ const QuestionBoard = ({ setTotalQues, totalQues, quesNum, setQuesNum, setShowRe
 
 
     const handleSubmit = () => {
-        console.log('SUBMIT ', totalQues)
         setShowReport(true)
     }
 
     return (
-        <>  {!showReport ?
+        <>{error ? <ErrorPage/> : <>  {!showReport ?
             (questionBank?.length > 0 ?
                 <div className='question-group'>
 
@@ -62,7 +62,6 @@ const QuestionBoard = ({ setTotalQues, totalQues, quesNum, setQuesNum, setShowRe
                         <Timer setShowReport={setShowReport} />
                     </div>
 
-                    {/* todo: disabled make addition in class to show disabled */}
                     <div className="buttons">
                         <button className="btn" disabled={quesNum === 0 ? true : false} onClick={() => setQuesNum((quesNum) => quesNum - 1)}>&larr; PREVIOUS</button>
                         <button className="btn" disabled={quesNum === questionBank?.length - 1 ? true : false} onClick={() => setQuesNum((quesNum) => quesNum + 1)}>NEXT &rarr;</button>
@@ -75,7 +74,8 @@ const QuestionBoard = ({ setTotalQues, totalQues, quesNum, setQuesNum, setShowRe
             ) :
             (showReport && <Report username={username} questionBank={questionBank} totalQues={totalQues} />)
         }
-        </>
+        </>}</>
+        
     )
 }
 

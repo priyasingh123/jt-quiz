@@ -26,9 +26,10 @@ const Question = ({question, index, totalQues, setTotalQues}) => {
             <div className='options'>
             {totalQues[index]?.mcq?.map ((option) => {
                 return (
-                    <div key={`${index}-${option}`} className='option'>
-                        <label ><input type="radio" name={`${question}-${index+1}`} value={option} checked={option === totalQues[index]?.attempted? true: false} onChange={handleChange} />{option}</label>
-                    </div>
+                    <label  key={`${index}-${option}`} className='option'>
+                        <input type="radio" name={`${question}-${index+1}`} value={option} checked={option === totalQues[index]?.attempted? true: false} onChange={handleChange} />
+                        {decode(option)}
+                    </label>
                 )
             })}
             </div>

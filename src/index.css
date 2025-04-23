@@ -110,6 +110,11 @@ code {
   padding: 10px;
 }
 
+.options{
+  display: flex;
+  flex-direction: column;
+}
+
 .option{
   width: 100%;
   min-height: 20%;
