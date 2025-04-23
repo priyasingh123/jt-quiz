@@ -102,6 +102,12 @@ code {
   align-items: center;
   flex-direction: column;
   flex:70%;
+  height: 300px;
+  width: 650px;
+  border: solid #092492cc 1px;
+  border-radius: 20px;
+  box-shadow: 4px 4px 4px grey;
+  padding: 10px;
 }
 
 .option{
@@ -121,6 +127,13 @@ code {
   background-color: #092492cc;
   color: white;
   border: none;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  background-color: #5b78ebcc;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .timer{
