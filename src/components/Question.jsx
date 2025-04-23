@@ -1,6 +1,7 @@
 import {useEffect } from 'react'
 import "./../index.css"
 import _ from 'lodash'
+import { decode } from 'he';
 
 const Question = ({question, index, totalQues, setTotalQues}) => {
     
@@ -20,7 +21,7 @@ const Question = ({question, index, totalQues, setTotalQues}) => {
 
     return (
         <div className="question">
-            <p>{`${index+1}. ${question}`}</p>
+            <p>{`${index+1}. ${decode(question)}`}</p>
 
             <div className='options'>
             {totalQues[index]?.mcq?.map ((option) => {
