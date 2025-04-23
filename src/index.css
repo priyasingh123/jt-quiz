@@ -102,12 +102,13 @@ code {
   align-items: center;
   flex-direction: column;
   flex:70%;
-  height: 300px;
+  height: 350px;
   width: 650px;
   border: solid #092492cc 1px;
   border-radius: 20px;
   box-shadow: 4px 4px 4px grey;
   padding: 10px;
+  overflow-y: auto;
 }
 
 .options{
