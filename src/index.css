@@ -226,6 +226,7 @@ code {
 }
 .label{
   padding: 0 35px;
+  display: flex;
 }
 .inputBox{
   width: 200px;
@@ -251,6 +252,24 @@ code {
 
 .inline{
   display: inline;
+}
+
+.submit_btn_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+@media only screen and (max-width: 450px) {
+  .login-form{
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .inputBox{
+    width: 100px;
+  }
 }
 
 

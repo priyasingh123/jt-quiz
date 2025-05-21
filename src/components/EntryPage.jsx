@@ -35,7 +35,7 @@ const EntryPage = ({username, setUsername}) => {
                     <label htmlFor="username" className="label">Username
                         <input className="inputBox" id="username" type="text" value={username} onChange={(e)=> {setUsername(e.target.value)}}/>
                     </label>
-                <button className="btn entry" onClick={handleLogin}>SUBMIT</button>
+                <div className='submit_btn_container'><button className="btn" onClick={handleLogin}>SUBMIT</button></div>
             </form>
         </div>
     )
